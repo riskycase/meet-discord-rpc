@@ -5,8 +5,7 @@
     "description": "Updates Discord Rich presence with the name of current meeting",
     "version": "0.0.1",
     "action": {
-        "default_icon": "icon.png",
-        "default_popup": "popup.html"
+        "default_icon": "icon.png"
     },
     "content_scripts": [
         {
