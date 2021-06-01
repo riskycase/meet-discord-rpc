@@ -1,0 +1,27 @@
+{
+    "manifest_version": 3,
+ 
+    "name": "Meet Discord RPC",
+    "description": "Updates Discord Rich presence with the name of current meeting",
+    "version": "0.0.1",
+    "action": {
+        "default_icon": "icon.png",
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [
+        {
+            "matches": ["*://meet.google.com/*"],
+            "js": ["content.js"]
+        }
+    ],
+    "background":{
+        "service_worker": "background.js"
+    },
+    "permissions": [
+        "activeTab",
+        "tabs"
+     ],
+     "host_permissions": [
+         "https://meet.google.com/*"
+     ]
+}
