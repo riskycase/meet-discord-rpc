@@ -1,7 +1,7 @@
 let inMeeting = false
 let startTime = null
 let title, lobby
-let lastInMeeting = inMeeting, lastLobby = lobby
+let lastInMeeting = inMeeting, lastLobby = lobby, lastTitle = title
 const urlRegex = /[a-z]{3}-[a-z]{4}-[a-z]{3}/.compile()
  
 let extensionId = "agnaejlkbiiggajjmnpmeheigkflbnoo"; //Chrome
@@ -21,7 +21,7 @@ const test = () => {
 
             // Get meeting title
             title = (document.querySelector('.Jyj1Td') || document.querySelector('.CkXZgc')).innerHTML
-            lobby = document.querySelector('.VfPpkd-rXoKne-JIbuQc') ? true : false
+            lobby = document.querySelector('.VfPpkd-rXoKne-JIbuQc') || document.querySelector('.tFj9ee') ? true : false
             // If start time isn't set and in meeting, set it to now
             if(!lobby && startTime == null)
                 startTime = new Date()
@@ -34,12 +34,14 @@ const test = () => {
             inMeeting = false;
             startTime = null;
         }
-        if(lastInMeeting != inMeeting || lastLobby != lobby){
+        // Force update when meeting state changed or title is fetched
+        if(lastInMeeting != inMeeting || lastLobby != lobby || lastTitle != title){
             // Register Presence
             chrome.runtime.sendMessage(extensionId, {mode: 'active'}, function(response) {
             });
             lastInMeeting = inMeeting
             lastLobby = lobby
+            lastTitle = title
         }
     }
 }
