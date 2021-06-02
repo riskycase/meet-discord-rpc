@@ -45,7 +45,7 @@ const test = () => {
     // Force update when meeting state changed or title is fetched
     if(lastInMeeting != inMeeting || lastLobby != lobby || lastTitle != title){
         // Register Presence
-        chrome.runtime.sendMessage(extensionId, {mode: 'active'}, function(response) {
+        chrome.runtime.sendMessage(extensionId, {mode: 'passive'}, function(response) {
         });
         lastInMeeting = inMeeting
         lastLobby = lobby
