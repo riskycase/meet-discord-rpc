@@ -21,7 +21,7 @@ const test = () => {
 
             // Get meeting title
             title = (document.querySelector('.Jyj1Td') || document.querySelector('.CkXZgc')).innerHTML
-            if(title == 'Ready to join?' || title == 'Meeting details')
+            if( title == 'Ready to join?' || title == 'Meeting details' || window.location.href.indexOf(title)+1 )
                 title = null
             lobby = document.querySelector('.VfPpkd-rXoKne-JIbuQc') || document.querySelector('.tFj9ee') ? true : false
             // If start time isn't set and in meeting, set it to now
