@@ -9,6 +9,9 @@ if(typeof browser !== 'undefined' && typeof chrome !== "undefined"){
   extensionId = "{57081fef-67b4-482f-bcb0-69296e63ec4f}"; //Firefox
 }
 
+// Dummy write with a dynamic value to trigger onChange listener 
+chrome.storage.sync.set({test: Date.now()});
+
 const test = () => {
 
     const url = new URL(window.location);
