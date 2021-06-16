@@ -7,7 +7,7 @@ let options = {
 chrome.storage.onChanged.addListener((changes, area) => {
     chrome.storage.sync.get(options, result => {
       // Update fields as neccessary
-      options = {...options, ...result};
+      options = result;
     })
 });
 
