@@ -3,7 +3,7 @@
  
     "name": "Meet Discord RPC",
     "description": "Updates Discord Rich presence with the name of current meeting",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "action": {
         "default_icon": "icon.png"
     },
