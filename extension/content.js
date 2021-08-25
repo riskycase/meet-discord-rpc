@@ -16,11 +16,22 @@ let options = {
 };
 
 chrome.storage.onChanged.addListener((changes, area) => {
-    if(area === 'sync')
-        chrome.storage.sync.get(options, result => {
-        // Update fields as neccessary
-        options = result;
-        })
+    chrome.storage.sync.get(options, result => {
+      // Update fields as neccessary
+      options = result;
+    })
+});
+
+chrome.storage.onChanged.addListener((changes, area) => {
+    if(changes.inCallText.newValue){
+        options.inCallText = changes.inCallText.newValue
+    }
+    if(changes.nameUnknownText.newValue){
+        options.nameUnknownText = changes.nameUnknownText.newValue
+    }
+    if(changes.waitingRoomText.newValue){
+        options.waitingRoomText = changes.waitingRoomText.newValue
+    }
 });
 
 // Dummy write with a dynamic value to trigger onChange listener 
