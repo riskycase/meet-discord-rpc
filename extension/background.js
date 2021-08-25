@@ -4,16 +4,13 @@ let options = {
   inCallText: 'In call',
 };
 
-chrome.storage.onChanged.addListener((changes, area) => {
-    chrome.storage.sync.get(options, result => {
-      // Update fields as neccessary
-      options = result;
-    })
-});
-
 chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
     if(request.action == "presence") {
         chrome.tabs.sendMessage(request.tab, request.info, function(data){
+          chrome.storage.sync.get(options, result => {
+            // Update fields as neccessary
+            options = result;
+          })
         let response = {};
         console.log(data);
         if(data.inMeeting){
