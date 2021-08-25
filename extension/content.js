@@ -16,56 +16,40 @@ let options = {
 };
 
 chrome.storage.onChanged.addListener((changes, area) => {
-    chrome.storage.sync.get(options, result => {
-      // Update fields as neccessary
-      options = result;
-    })
-});
-
-chrome.storage.onChanged.addListener((changes, area) => {
-    if(changes.inCallText.newValue){
+    if(changes.inCallText){
         options.inCallText = changes.inCallText.newValue
     }
-    if(changes.nameUnknownText.newValue){
+    if(changes.nameUnknownText){
         options.nameUnknownText = changes.nameUnknownText.newValue
     }
-    if(changes.waitingRoomText.newValue){
+    if(changes.waitingRoomText){
         options.waitingRoomText = changes.waitingRoomText.newValue
     }
 });
 
-// Dummy write with a dynamic value to trigger onChange listener 
-chrome.storage.sync.set({test: Date.now()});
+chrome.storage.sync.get(options, result => {
+    // Update fields as neccessary
+    options = result;
+});
 
-const test = () => {
+const presenceUpdate = () => {
+    // If inside meeting or waiting room
+    if(document.querySelector('.Jyj1Td') || document.querySelector('.CkXZgc')){
 
-    const url = new URL(window.location);
-
-    //Check if URL is of a meeting
-    if(urlRegex.exec(url.pathname)){
-
-        // If inside meeting or waiting room
-        if(document.querySelector('.Jyj1Td') || document.querySelector('.CkXZgc')){
-
-            // Get meeting title
-            title = (document.querySelector('.Jyj1Td') || document.querySelector('.CkXZgc')).innerHTML
-            if( title == 'Ready to join?' || title == 'Meeting details' || window.location.href.indexOf(title)+1 )
-                title = options.nameUnknownText
-            lobby = document.querySelector('.VfPpkd-rXoKne-JIbuQc') || document.querySelector('.tFj9ee') ? true : false
-            // If start time isn't set and in meeting, set it to now
-            if(!lobby && startTime == null)
-                startTime = new Date()
-            // Erase start time if not in meeing
-            else if(lobby)
-                startTime = null
-            inMeeting = true
-        }
-        // Possible breaking change introduced
-        else{
-            inMeeting = false;
-            startTime = null;
-        }
+        // Get meeting title
+        title = (document.querySelector('.Jyj1Td') || document.querySelector('.CkXZgc')).innerHTML
+        if( title == 'Ready to join?' || title == 'Meeting details' || window.location.href.indexOf(title)+1 )
+            title = options.nameUnknownText
+        lobby = document.querySelector('.VfPpkd-rXoKne-JIbuQc') || document.querySelector('.tFj9ee') ? true : false
+        // If start time isn't set and in meeting, set it to now
+        if(!lobby && startTime == null)
+            startTime = new Date()
+        // Erase start time if not in meeing
+        else if(lobby)
+            startTime = null
+        inMeeting = true
     }
+    // Possible breaking change introduced
     else{
         inMeeting = false;
         startTime = null;
@@ -80,8 +64,10 @@ const test = () => {
     }
 }
 
-setInterval(test, 1000);
-
+//Check if URL is of a meeting
+if(urlRegex.exec((new URL(window.location)).pathname)){
+    setInterval(presenceUpdate, 1000);
+}
 // Wait for presence Requests
 chrome.runtime.onMessage.addListener(function(info, sender, sendResponse) {
     sendResponse(getPresence());
