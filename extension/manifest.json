@@ -1,28 +1,22 @@
 {
-    "manifest_version": 3,
- 
-    "name": "Meet Discord RPC",
-    "description": "Updates Discord Rich presence with the name of current meeting",
-    "version": "0.0.2",
-    "action": {
-        "default_icon": "icon.png"
-    },
-    "options_page": "options.html",
-    "content_scripts": [
-        {
-            "matches": ["*://meet.google.com/*"],
-            "js": ["content.js"]
-        }
-    ],
-    "background":{
-        "service_worker": "background.js"
-    },
-    "permissions": [
-        "activeTab",
-        "tabs",
-        "storage"
-     ],
-     "host_permissions": [
-         "https://meet.google.com/*"
-     ]
+  "manifest_version": 3,
+
+  "name": "Meet Discord RPC",
+  "description": "Updates Discord Rich presence with the name of current meeting",
+  "version": "0.0.2",
+  "action": {
+    "default_icon": "icon.png"
+  },
+  "options_page": "options.html",
+  "content_scripts": [
+    {
+      "matches": ["*://meet.google.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["activeTab", "tabs", "storage"],
+  "host_permissions": ["https://meet.google.com/*"]
 }

@@ -1,52 +1,63 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Meet Discord RPC - Options</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <h2>Meet Discord RPC - Options</h2>
-        <form>
-          <hr>
-          <div>
-            <label class="switch">
-              <input type="checkbox" id="checkboxMeetingTitle">
-              <span class="slider"></span>
-            </label>
-            <span>
-              Use custom meeting title if when current meeting has no title?
-            </span>
-            <div>
-              <input type="text" placeholder="Unknown meeting title" value="Unknown meeting title" id="textMeetingTitle">
-            </div>
-          </div>
-          <div>
-            <label class="switch">
-              <input type="checkbox" id="checkboxWaitingRoom">
-              <span class="slider"></span>
-            </label>
-            <span>
-              Use custom text when in waiting room?
-            </span>
-            <div>
-              <input type="text" placeholder="In waiting room" value="In waiting room" id="textWaitingRoom">
-            </div>
-          </div>
-          <div>
-            <label class="switch">
-              <input type="checkbox" id="checkboxInCall">
-              <span class="slider"></span>
-            </label>
-            <span>
-              Use custom text when in call?
-            </span>
-            <div>
-              <input type="text" placeholder="In call" value="In call" id="textInCall">
-            </div>
-          </div>
-        </form>
-    </body>
-    <script src="options.js"></script>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Meet Discord RPC - Options</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h2>Meet Discord RPC - Options</h2>
+    <form>
+      <hr />
+      <div>
+        <label class="switch">
+          <input type="checkbox" id="checkboxMeetingTitle" />
+          <span class="slider"></span>
+        </label>
+        <span>
+          Use custom meeting title if when current meeting has no title?
+        </span>
+        <div>
+          <input
+            type="text"
+            placeholder="Unknown meeting title"
+            value="Unknown meeting title"
+            id="textMeetingTitle"
+          />
+        </div>
+      </div>
+      <div>
+        <label class="switch">
+          <input type="checkbox" id="checkboxWaitingRoom" />
+          <span class="slider"></span>
+        </label>
+        <span> Use custom text when in waiting room? </span>
+        <div>
+          <input
+            type="text"
+            placeholder="In waiting room"
+            value="In waiting room"
+            id="textWaitingRoom"
+          />
+        </div>
+      </div>
+      <div>
+        <label class="switch">
+          <input type="checkbox" id="checkboxInCall" />
+          <span class="slider"></span>
+        </label>
+        <span> Use custom text when in call? </span>
+        <div>
+          <input
+            type="text"
+            placeholder="In call"
+            value="In call"
+            id="textInCall"
+          />
+        </div>
+      </div>
+    </form>
+  </body>
+  <script src="options.js"></script>
 </html>
