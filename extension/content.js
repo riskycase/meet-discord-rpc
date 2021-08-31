@@ -3,6 +3,30 @@ let startTime = null
 let title, lobby
 let lastInMeeting = inMeeting, lastLobby = lobby, lastTitle = title
 const urlRegex = /[a-z]{3}-[a-z]{4}-[a-z]{3}/.compile()
+const webSocket = new WebSocket('ws://127.0.0.1:6970');
+
+const sendData = () => {
+    if(webSocket.readyState !== WebSocket.CLOSED){
+        if(webSocket.readyState === WebSocket.OPEN){
+            if(inMeeting) {
+                let presenceObject = {
+                    details: title,
+                    state: lobby ? options.waitingRoomText : options.inCallText,
+                    largeImageKey: 'meet',
+                    largeImageText: 'Google Meet',
+                }
+                if(startTime) {
+                    presenceObject.startTimestamp = startTime
+                }
+                webSocket.send(JSON.stringify(presenceObject));
+            }
+            else {
+            webSocket.send(JSON.stringify({}))
+            }
+        }
+        else setTimeout(sendData, 500);
+    }
+}
  
 let extensionId = "agnaejlkbiiggajjmnpmeheigkflbnoo"; //Chrome
 if(typeof browser !== 'undefined' && typeof chrome !== "undefined"){
@@ -61,6 +85,7 @@ const presenceUpdate = () => {
         lastInMeeting = inMeeting
         lastLobby = lobby
         lastTitle = title
+        sendData();
     }
 }
 
